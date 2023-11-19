@@ -1,9 +1,10 @@
 const express = require('express');
 const port = 3005;
 const expressLayouts = require('express-ejs-layouts');
+const session = require('express-session');
+const MemoryStore = require('memorystore')(session)
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-const session = require('express-session');
 const passport = require('passport');
 
 const app = express();
@@ -31,6 +32,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
     session({
         secret: 'secret',
+        store: new MemoryStore({
+            checkPeriod: 86400000 // prune expired entries every 24h
+        }),
         resave: true,
         saveUninitialized: true
     })
