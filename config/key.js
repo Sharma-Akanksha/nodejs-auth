@@ -6,7 +6,7 @@ module.exports = {
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://0.0.0.0:27017/Nodejs-Auth');
+mongoose.connect(module.exports.MongoURI);
 
 const db = mongoose.connection;
 
